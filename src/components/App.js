@@ -8,6 +8,7 @@ function App() {
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = useState('');
+  const [textareaValue, setTextareaValue] = useLocalStorage("prompt", "");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -21,14 +22,18 @@ function App() {
     }, 250)
     return () => clearTimeout(timeout)
   }, [html, css, js])
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTextareaValue(e.target.prompt.value);
+  }
   return (
     <>
       <div className="pane top-pane">
-        <form id="myForm">
-          <label for="textareaInput">Enter Your question from openAI:</label>
-          <textarea id="textareaInput" rows="4" cols="50"></textarea>
+        <form id="myForm" onSubmit={handleSubmit}>
+          <label htmlFor="prompt">Enter Your question from openAI:</label>
+          <textarea name="prompt" id="prompt" rows="4" cols="50" >{textareaValue}</textarea>
           <br />
-          <button type="button" onclick="submitForm()">Submit</button>
+          <button type="submit" >Submit</button>
         </form>
       </div>
       <div className="pane middle-pane">
