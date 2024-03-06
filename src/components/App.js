@@ -24,6 +24,14 @@ function App() {
   return (
     <>
       <div className="pane top-pane">
+        <form id="myForm">
+          <label for="textareaInput">Enter Your question from openAI:</label>
+          <textarea id="textareaInput" rows="4" cols="50"></textarea>
+          <br />
+          <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+      </div>
+      <div className="pane middle-pane">
         <Editor
           language="xml"
           displayName="HTML"
